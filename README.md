@@ -334,12 +334,12 @@ The long-term vision is a **Governance-as-Code platform**: a declarative policy 
 
 | Document | Purpose |
 |----------|---------|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Full technical architecture with component diagrams and data flow |
-| [ECOSYSTEM.md](ECOSYSTEM.md) | Ecosystem overview, integration patterns, deployment models |
-| [COMPREHENSIVE_CRITIQUE.md](COMPREHENSIVE_CRITIQUE.md) | Self-assessment: logic audit, rhetorical analysis, blindspots, evolution plan |
-| [ROADMAP.md](ROADMAP.md) | Strategic roadmap with success metrics and risk management |
-| [GOVERNANCE_ANALYSIS.md](GOVERNANCE_ANALYSIS.md) | Audit log of governance improvements and validation results |
-| [PRODUCT_ARCHITECTURE.md](PRODUCT_ARCHITECTURE.md) | Framework-as-Code product design and business model |
+| [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | Full technical architecture with component diagrams and data flow |
+| [ECOSYSTEM.md](./docs/ECOSYSTEM.md) | Ecosystem overview, integration patterns, deployment models |
+| [COMPREHENSIVE_CRITIQUE.md](./docs/COMPREHENSIVE_CRITIQUE.md) | Self-assessment: logic audit, rhetorical analysis, blindspots, evolution plan |
+| [ROADMAP.md](./docs/ROADMAP.md) | Strategic roadmap with success metrics and risk management |
+| [GOVERNANCE_ANALYSIS.md](./docs/GOVERNANCE_ANALYSIS.md) | Audit log of governance improvements and validation results |
+| [PRODUCT_ARCHITECTURE.md](./docs/PRODUCT_ARCHITECTURE.md) | Framework-as-Code product design and business model |
 | [config/schema.json](config/schema.json) | JSON Schema for governance.yml validation |
 | [ORGAN-IV: agentic-titan](https://github.com/organvm-iv-taxis/agentic-titan) | Downstream orchestration engine consuming governance primitives |
 
