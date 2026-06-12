@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Security Scorecard
         uses: ossf/scorecard-action@v2.4.3
@@ -59,7 +59,7 @@ jobs:
           echo "- [ ] Configure security policy (SECURITY.md)" >> audit-report.md
 
       - name: Upload audit report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: security-audit-report
           path: audit-report.md
