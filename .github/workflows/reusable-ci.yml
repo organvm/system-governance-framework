@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Load governance configuration
         id: load-config
@@ -88,7 +88,7 @@ jobs:
     if: fromJSON(needs.setup.outputs.config).features.quality.enabled != false
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-python@v6
         with:
@@ -119,7 +119,7 @@ jobs:
       needs.setup.outputs.has-python == 'true'
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup Python
         uses: actions/setup-python@v6
@@ -170,7 +170,7 @@ jobs:
       needs.setup.outputs.has-javascript == 'true'
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -211,7 +211,7 @@ jobs:
       needs.setup.outputs.has-go == 'true'
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup Go
         uses: actions/setup-go@v6
@@ -246,7 +246,7 @@ jobs:
       needs.setup.outputs.has-java == 'true'
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup Java
         uses: actions/setup-java@v5
