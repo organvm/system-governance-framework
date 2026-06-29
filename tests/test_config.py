@@ -2,16 +2,19 @@
 
 import tempfile
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 import yaml
 
+import src.config as config_mod
 from src.config import (
     ConfigError,
     _deep_merge,
     config_to_repo_state,
     load_governance_config,
     load_preset,
+    load_schema,
 )
 
 
@@ -134,3 +137,34 @@ class TestConfigToRepoState:
         assert state["codeql_enabled"] is True
         assert state["semgrep_enabled"] is True
         assert state["compliance_enabled"] is True
+
+
+class TestLoadPresetMissingFile:
+    def test_raises_when_preset_file_absent(self):
+        """load_preset raises ConfigError when the preset YAML file doesn't exist on disk."""
+        with tempfile.TemporaryDirectory() as tmpdir, \
+             patch.object(config_mod, "PRESETS_DIR", Path(tmpdir)):
+            with pytest.raises(ConfigError, match="Preset file not found"):
+                load_preset("minimal")
+
+
+class TestLoadSchema:
+    def test_loads_schema_successfully(self):
+        schema = load_schema()
+        assert isinstance(schema, dict)
+        assert "$schema" in schema or "type" in schema
+
+    def test_raises_when_schema_file_absent(self):
+        with patch.object(config_mod, "SCHEMA_PATH", Path("/nonexistent/schema.json")):
+            with pytest.raises(ConfigError, match="Schema file not found"):
+                load_schema()
+
+
+class TestLoadGovernanceConfigFrameworkType:
+    def test_rejects_non_mapping_framework(self):
+        """load_governance_config raises when 'framework' key is not a dict."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "governance.yml"
+            path.write_text("framework: just_a_string\n")
+            with pytest.raises(ConfigError, match="mapping"):
+                load_governance_config(path)
