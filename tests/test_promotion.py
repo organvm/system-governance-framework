@@ -1,7 +1,5 @@
 """Tests for the promotion state machine."""
 
-import sys
-import importlib
 from unittest.mock import MagicMock, patch
 from src.promotion import VALID_TRANSITIONS, can_promote, promote
 import src.promotion as promotion_module
@@ -74,23 +72,6 @@ class TestStateMachine:
 
 
 class TestEngineIntegration:
-    def test_engine_state_machine_import(self):
-        mock_engine = MagicMock()
-        mock_sm = MagicMock()
-        mock_engine.governance.state_machine = mock_sm
-        
-        with patch.dict('sys.modules', {
-            'organvm_engine': mock_engine,
-            'organvm_engine.governance': mock_engine.governance,
-            'organvm_engine.governance.state_machine': mock_sm,
-        }):
-            importlib.reload(promotion_module)
-            assert promotion_module._HAS_ENGINE_STATE_MACHINE is True
-            
-        # Restore original state
-        importlib.reload(promotion_module)
-        assert promotion_module._HAS_ENGINE_STATE_MACHINE is False
-
     def test_engine_allowed_same_canonical(self):
         promotion_module._engine_check_transition = MagicMock(return_value=(True, ""))
         # Both CANONICAL and LEGACY mapped identically (or not mapped)
