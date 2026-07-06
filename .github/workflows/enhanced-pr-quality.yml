@@ -95,11 +95,11 @@ jobs:
           # Get changed files
           git diff --name-only origin/${{ github.base_ref }}...HEAD > changed_files.txt
 
-          # Count different file types
+          # Count different file types (using grep -E with wc -l for cross-platform compatibility)
           total_files=$(wc -l < changed_files.txt)
-          source_files=$(grep -cE '\.(js|ts|jsx|tsx|py|go|rs|java|cs|cpp|c)$' changed_files.txt || echo 0)
-          test_files=$(grep -cE '(test|spec)\.(js|ts|jsx|tsx|py|go|rs|java|cs)$' changed_files.txt || echo 0)
-          doc_files=$(grep -cE '\.(md|txt|rst|adoc)$' changed_files.txt || echo 0)
+          source_files=$(grep -E '\.(js|ts|jsx|tsx|py|go|rs|java|cs|cpp|c)$' changed_files.txt | wc -l)
+          test_files=$(grep -E '(test|spec)\.(js|ts|jsx|tsx|py|go|rs|java|cs)$' changed_files.txt | wc -l)
+          doc_files=$(grep -E '\.(md|txt|rst|adoc)$' changed_files.txt | wc -l)
 
           echo "total_files=$total_files" >> $GITHUB_OUTPUT
           echo "source_files=$source_files" >> $GITHUB_OUTPUT
